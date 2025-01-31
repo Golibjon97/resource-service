@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: resource-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      region:
+        static: us-east-1
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://${EUREKA:localhost}:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: true

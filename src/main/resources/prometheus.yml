@@ -1,0 +1,28 @@
+scrape_configs:
+  - job_name: 'resource-service'
+    scrape_interval: 2s
+    metrics_path: '/api/v1/resources/actuator/prometheus' ##prometheus endpoint
+    static_configs:
+      - targets: ['host.docker.internal:8181'] ## ['host.docker.internal:8181']
+
+  - job_name: 'resource-processor'
+    scrape_interval: 2s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:9002']
+
+  - job_name: 'song-service'
+    scrape_interval: 2s
+    metrics_path: '/api/v1/song/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8181']
+
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['prometheus:9090']
+
+  - job_name: 'node'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['node-exporter:9100']

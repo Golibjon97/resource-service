@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${dependencyManagementVersion}"
+}
+
+group = 'com.epam'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+    implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.postgresql:postgresql:${postgresqlVersion}")
+    implementation("org.apache.tika:tika-core:${tikaCoreVersion}")
+    implementation("org.apache.tika:tika-parser-audiovideo-module:${tikaCoreVersion}")
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-s3:${awsStarterVersion}")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}")
+    implementation("com.mpatric:mp3agic:${mp3agicVersion}")
+    implementation("net.logstash.logback:logstash-logback-encoder:${logstashLogback}")
+
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.assertj:assertj-core")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:kafka")
+    testImplementation("org.testcontainers:mongodb")
+    testImplementation("software.amazon.awssdk:s3:2.8.3")
+
+}
+
+test {
+    useJUnitPlatform()
+}

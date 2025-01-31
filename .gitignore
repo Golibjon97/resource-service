@@ -1,0 +1,17 @@
+.idea
+**/*.versionsBackup
+*.iml
+**/*.swp
+target/*
+.classpath
+.project
+.vscode
+.settings/
+bin/
+logs/*
+/target/
+src/test/jmeter/results/*
+generatedData/*
+/.gradle/
+/build/
+.env
